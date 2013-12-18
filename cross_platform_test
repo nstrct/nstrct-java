@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# mvn assembly:assembly
+java -cp com.nstrct.nstrct.CrossPlatformTest -jar $0/../target/nstrct-0.0.1-jar-with-dependencies.jar $1
