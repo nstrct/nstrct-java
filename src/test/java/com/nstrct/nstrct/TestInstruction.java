@@ -4,6 +4,8 @@ import org.joou.Unsigned;
 import org.junit.Test;
 import junit.framework.Assert;
 
+import java.nio.ByteBuffer;
+
 public class TestInstruction {
 
   public static void dumpBytes(byte[] bytes) {
@@ -16,9 +18,9 @@ public class TestInstruction {
   }
 
   public void proofInstruction(Instruction instruction1) {
-    Instruction instruction2 = Instruction.parse(instruction1.pack());
-    dumpBytes(instruction1.pack());
-    Assert.assertEquals(instruction2.toString(), instruction1.toString());
+    Frame frame1 = new Frame(instruction1);
+    Frame frame2 = Frame.parse(ByteBuffer.wrap(frame1.pack()));
+    Assert.assertEquals(frame2.toString(), frame1.toString());
   }
 
   @Test

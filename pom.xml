@@ -7,7 +7,6 @@
     <name>nstrct-java</name>
     <description>a multi-purpose binary protocol for instruction interchange</description>
     <version>0.0.1</version>
-    <packaging>bundle</packaging>
     <url>https://github.com/nstrct/nstrct-java</url>
     <licenses>
         <license>
