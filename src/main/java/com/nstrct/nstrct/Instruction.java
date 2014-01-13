@@ -1,18 +1,16 @@
 package com.nstrct.nstrct;
 
+import org.joou.Unsigned;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 
 public class Instruction {
 
-  public static Instruction parse(byte[] bytes) {
-    return Instruction.parse(ByteBuffer.wrap(bytes));
-  }
-
   public static Instruction parse(ByteBuffer buffer) {
     buffer.order(ByteOrder.BIG_ENDIAN);
-    Instruction instruction = new Instruction(buffer.getShort());
+    Instruction instruction = new Instruction(Unsigned.ushort(buffer.getShort()).intValue());
     int numArguments = buffer.get();
     buffer.getShort(); // take out unneeded total number of array elements
 

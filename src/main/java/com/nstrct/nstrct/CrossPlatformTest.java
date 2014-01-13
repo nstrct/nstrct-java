@@ -35,7 +35,8 @@ public class CrossPlatformTest {
         i.arguments.add(new Argument(Value.Datatype.uInt16, true, new Value(Unsigned.ushort(2443)), new Value(Unsigned.ushort(3443))));
 
         try {
-          byte[] data = i.pack();
+          Frame frame = new Frame(i);
+          byte[] data = frame.pack();
           ByteBuffer buffer = ByteBuffer.allocate(data.length+4);
           buffer.order(ByteOrder.BIG_ENDIAN);
           buffer.putInt(data.length);
@@ -53,7 +54,7 @@ public class CrossPlatformTest {
           byte[] data = new byte[length];
           System.in.read(data);
           ByteBuffer buffer = ByteBuffer.wrap(data);
-          Instruction i = Instruction.parse(buffer);
+          Instruction i = Frame.parse(buffer).instruction;
           _assert("    boolean value error", i.arguments.get(0).values.get(0).booleanValue.equals(Boolean.FALSE));
           _assert("    int8 value error", i.arguments.get(1).values.get(0).signedNumberValue.equals(Byte.MIN_VALUE));
           _assert("    int16 value error", i.arguments.get(2).values.get(0).signedNumberValue.equals(Short.MIN_VALUE));
