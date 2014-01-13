@@ -21,20 +21,22 @@ _This software has been open sourced by [ElectricFeel Mobility Systems Gmbh](htt
 // basic example
 Instruction instruction = new Instruction(12);
 instruction.arguments.add(new Argument(Value.Datatype.uInt8, false, new Value(253)));
-byte[] bytes = instruction.pack();
+Frame frame = new Frame(instruction);
+byte[] bytes = frame.pack();
 
 // advaned example
 Instruction instruction = new Instruction(233);
 instruction.arguments.add(new Argument(Value.Datatype.Int64, false, new Value(87347323)));
 instruction.arguments.add(new Argument(Value.Datatype.String, false, new Value("hello there")));
 instruction.arguments.add(new Argument(Value.Datatype.Float32, true, new Value(5.4), new Value(5.3), new Value(5.1)));
-byte[] bytes = instruction.pack();
+Frame frame = new Frame(instruction);
+byte[] bytes = frame.pack();
 ```
 
 ## Instruction Processing
 
 ```java
-Instruction instruction = Instruction.parse(bytes);
+Instruction instruction = Frame.parse(bytes).instruction;
 instruction.code;
 instruction.arguments.get(0).datatype;
 instruction.arguments.get(0).value.unsignedNumberValue;
